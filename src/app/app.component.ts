@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,16 @@ import { Component } from '@angular/core';
 
 export class AppComponent {
   title = 'big-answers-connections';
+
+  files: File[] = [];
+
+	onSelect(event: { addedFiles: any; }) {
+		console.log(event);
+		this.files.push(...event.addedFiles);
+	}
+
+	onRemove(event: File) {
+		console.log(event);
+		this.files.splice(this.files.indexOf(event), 1);
+	}
 }

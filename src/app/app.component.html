@@ -15,13 +15,34 @@
   </mat-toolbar>
 </p>
 
+
+<div fxLayout="row" fxLayoutAlign="space-evenly">
+
 <!--Drop Zone Component-->
 
-<!-- <ngx-dropzone (change)="onSelect($event)">
-	<ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
-	<ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
-		<ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-	</ngx-dropzone-preview>
-</ngx-dropzone> -->
+  <div fxLayout="row" fxLayoutAlign="space-between">
+    <ngx-dropzone (change)="onSelect($event)">
+      <ngx-dropzone-label>Drop Files Here</ngx-dropzone-label>
+      <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+      </ngx-dropzone-preview>
+    </ngx-dropzone>
+  </div>
+
+
+  <!-- Second Drop Zone Component -->
+
+  <div fxLayout="row" fxLayoutAlign="space-between">
+    <ngx-dropzone (change)="onSelect($event)">
+      <ngx-dropzone-label>Drop Files Here</ngx-dropzone-label>
+      <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+      </ngx-dropzone-preview>
+    </ngx-dropzone>
+  </div>
+
+</div>
+
+
 
 <router-outlet></router-outlet>

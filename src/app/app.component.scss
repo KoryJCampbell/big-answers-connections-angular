@@ -1,3 +1,27 @@
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+
 .example-spacer {
   flex: 1 1 auto;
+}
+
+* {
+  font-family: Lato;
+}
+
+ngx-dropzone,
+.custom-dropzone {
+  margin: 20px;
+}
+
+.custom-dropzone {
+	height: 250px;
+	background: #333;
+	color: #fff;
+	border: 5px dashed rgb(235, 79, 79);
+	border-radius: 5px;
+	font-size: 20px;
+}
+
+.custom-dropzone.ngx-dz-hovered {
+  border: 5px solid rgb(235, 79, 79);
 }
