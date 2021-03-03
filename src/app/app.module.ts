@@ -9,10 +9,12 @@ import {MatButtonModule} from '@angular/material/button';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NetworkGraphComponent } from './network-graph/network-graph.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NetworkGraphComponent
   ],
   imports: [
     BrowserModule,

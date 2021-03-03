@@ -21,4 +21,5 @@ export class AppComponent {
 		console.log(event);
 		this.files.splice(this.files.indexOf(event), 1);
 	}
+
 }
