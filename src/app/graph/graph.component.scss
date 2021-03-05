@@ -1,7 +1,6 @@
-@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
 
- .link {
-  stroke-width: 0.25;
+.link {
+  stroke-width: 2.25;
   stroke: black;
 }
 
@@ -11,7 +10,7 @@
   fill 0.1s ease-out,
   stroke 0.1s ease-out;
 
-  stroke: white;
+  stroke: black;
   stroke-width: 0.25;
 }
 
@@ -20,5 +19,5 @@
   text-anchor: middle;
   alignment-baseline: central;
   font-weight: 300;
-  fill: white;
+  fill: black;
 }

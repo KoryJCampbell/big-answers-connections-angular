@@ -25,9 +25,12 @@ export class GraphComponent implements OnInit {
     const width = +svg.attr('width');
     const height = +svg.attr('height');
 
+    const color = d3.scaleOrdinal(d3.schemeTableau10);
+
+
     const simulation = d3.forceSimulation()
-      .force('link', d3.forceLink().id((d: Node) => d.id))// the id of the node
-      .force('charge', d3.forceManyBody())
+      .force('link', d3.forceLink().id((d: Node) => d.name))// the id of the node
+      .force("charge", d3.forceManyBody().strength(-5).distanceMax(0.1 * Math.min(width, height)))
       .force('center', d3.forceCenter(width / 2, height / 2));
 
     console.log(nodes, links);
@@ -38,8 +41,10 @@ export class GraphComponent implements OnInit {
       .data(links)
       .enter()
       .append('line')
-      .attr('stroke-width', d => Math.sqrt(d.value))
+      .attr('stroke-width', d => Math.sqrt(d.index))
       .attr('stroke', 'black');
+
+
 
     const node = svg.append('g')
       .attr('class', 'nodes')
@@ -48,14 +53,15 @@ export class GraphComponent implements OnInit {
       .enter()
       .append('circle')
       .attr('r', 5)
-      .attr('fill', 'red')
+      .attr("fill", function(d) { return color(d.company); })
       .call(d3.drag()
         .on('start', dragStarted)
         .on('drag', dragged)
         .on('end', dragEnded)
       );
 
-    node.append('title').text((d) => d.id);
+
+    node.append('title').text((d) => d.name);
 
     simulation
       .nodes(nodes)
