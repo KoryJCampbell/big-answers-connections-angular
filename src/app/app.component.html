@@ -1,50 +1,52 @@
 <!-- Header Component -->
-<p>
+<div>
   <mat-toolbar color="primary">
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-      <mat-icon>menu</mat-icon>
-    </button>
     <span>Connections Finder</span>
+
     <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon>favorite</mat-icon>
+
+    <div fxShow="true" fxHide.lt-md="true">
+    <button mat-button>
+      <mat-icon>search</mat-icon>
+      <span>Search</span>
     </button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-      <mat-icon>share</mat-icon>
-    </button>
+    </div>
+
   </mat-toolbar>
-</p>
+</div>
 
 <!--Network Graph -->
-<app-network-graph></app-network-graph>
 
+<div fxLayout="column" fxLayoutAlign="center center">
+  <app-network-graph></app-network-graph>
+</div>
 
-<div fxLayout="row" fxLayoutAlign="space-evenly">
+<!-- <div fxLayout="row" fxLayoutAlign="space-evenly"> -->
 
 <!--Drop Zone Component-->
 
-  <div fxLayout="row" fxLayoutAlign="space-between">
-    <ngx-dropzone (change)="onSelect($event)">
-      <ngx-dropzone-label>Drop Files Here</ngx-dropzone-label>
-      <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
-        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-      </ngx-dropzone-preview>
-    </ngx-dropzone>
-  </div>
+<!-- <div fxLayout="row" fxLayoutAlign="space-between">
+  <ngx-dropzone (change)="onSelect($event)">
+    <ngx-dropzone-label>Drop Files Here</ngx-dropzone-label>
+    <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+      <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+    </ngx-dropzone-preview>
+  </ngx-dropzone>
+</div> -->
 
 
-  <!-- Second Drop Zone Component -->
+<!-- Second Drop Zone Component -->
 
-  <div fxLayout="row" fxLayoutAlign="space-between">
-    <ngx-dropzone (change)="onSelect($event)">
-      <ngx-dropzone-label>Drop Files Here</ngx-dropzone-label>
-      <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
-        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-      </ngx-dropzone-preview>
-    </ngx-dropzone>
-  </div>
+<!-- <div fxLayout="row" fxLayoutAlign="space-between">
+  <ngx-dropzone (change)="onSelect($event)">
+    <ngx-dropzone-label>Drop Files Here</ngx-dropzone-label>
+    <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+      <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+    </ngx-dropzone-preview>
+  </ngx-dropzone>
+</div> -->
 
-</div>
+<!-- </div> -->
 
 
 
