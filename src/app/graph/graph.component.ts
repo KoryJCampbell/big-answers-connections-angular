@@ -16,7 +16,6 @@ export class GraphComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('d3 version:', d3.version);
     this.loadForceDirectedGraph(data.nodes, data.links);
   }
 
@@ -33,7 +32,7 @@ export class GraphComponent implements OnInit {
       .force("charge", d3.forceManyBody().strength(-5).distanceMax(0.1 * Math.min(width, height)))
       .force('center', d3.forceCenter(width / 2, height / 2));
 
-    console.log(nodes, links);
+    // console.log(nodes, links);
 
     const link = svg.append('g')
       .attr('class', 'links')

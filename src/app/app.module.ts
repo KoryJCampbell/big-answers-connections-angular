@@ -10,11 +10,13 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GraphComponent } from './graph/graph.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    GraphComponent
+    GraphComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
