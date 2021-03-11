@@ -1,34 +1,28 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularMaterialModule } from './angular-material.module';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GraphComponent } from './graph/graph.component';
 import { LoginComponent } from './login/login.component';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module'
 
 @NgModule({
   declarations: [
     AppComponent,
-    GraphComponent,
-    LoginComponent
+    LoginComponent,
+    GraphComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
+    AngularMaterialModule,
     BrowserAnimationsModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
     NgxDropzoneModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    AppRoutingModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

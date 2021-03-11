@@ -1,53 +1,18 @@
 <!-- Header Component -->
-<div>
-  <mat-toolbar color="primary">
-    <span>Connections Finder</span>
-
-    <span class="example-spacer"></span>
-
-    <div fxShow="true" fxHide.lt-md="true">
-    <button mat-button>
-      <mat-icon>search</mat-icon>
-      <span>Search</span>
+<div class="header-div">
+  <mat-toolbar color="primary" class="expanded-toolbar">
+    <button mat-button routerLink="/">
+      <mat-icon>home</mat-icon>
     </button>
+    <span>Connections Finder</span>
+    <span class="example-spacer"></span>
+    <div fxShow="true" fxHide.lt-md="true">
+      <button mat-button>
+        <mat-icon>search</mat-icon>
+        <span>Search</span>
+      </button>
     </div>
-
   </mat-toolbar>
 </div>
-
-<!--Network Graph -->
-
-<div fxLayout="column" fxLayoutAlign="center center">
-  <app-graph></app-graph>
-</div>
-
-<!-- <div fxLayout="row" fxLayoutAlign="space-evenly"> -->
-
-<!--Drop Zone Component-->
-
-<!-- <div fxLayout="row" fxLayoutAlign="space-between">
-  <ngx-dropzone (change)="onSelect($event)">
-    <ngx-dropzone-label>Drop Files Here</ngx-dropzone-label>
-    <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
-      <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-    </ngx-dropzone-preview>
-  </ngx-dropzone>
-</div> -->
-
-
-<!-- Second Drop Zone Component -->
-
-<!-- <div fxLayout="row" fxLayoutAlign="space-between">
-  <ngx-dropzone (change)="onSelect($event)">
-    <ngx-dropzone-label>Drop Files Here</ngx-dropzone-label>
-    <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
-      <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-    </ngx-dropzone-preview>
-  </ngx-dropzone>
-</div> -->
-
-<!-- </div> -->
-
-
 
 <router-outlet></router-outlet>

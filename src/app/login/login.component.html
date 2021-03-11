@@ -1,1 +1,18 @@
-<h2>Login Component</h2>
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+
+  <mat-card class="box">
+    <div class="example-form">
+      <mat-card-content>
+        <div>
+          <ngx-dropzone (change)="onSelect($event)">
+            <ngx-dropzone-label>Upload .CSV Files</ngx-dropzone-label>
+            <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+              <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+            </ngx-dropzone-preview>
+          </ngx-dropzone>
+        </div>
+      </mat-card-content>
+    </div>
+  </mat-card>
+
+</div>
