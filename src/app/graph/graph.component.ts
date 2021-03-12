@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
 import * as d3 from 'd3';
-import * as data from '../../assets/miserables.json';
 import {Node} from '../d3/models/node';
 import {Link} from '../d3/models/link';
 
@@ -16,7 +14,10 @@ export class GraphComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.loadForceDirectedGraph(data.nodes, data.links);
+    const retrievedObject = localStorage.getItem('graph');
+    const graph = JSON.parse(retrievedObject);
+    this.loadForceDirectedGraph(graph.nodes, graph.links);
+
   }
 
   loadForceDirectedGraph(nodes: Node[], links: Link[]) {
@@ -29,10 +30,10 @@ export class GraphComponent implements OnInit {
 
     const simulation = d3.forceSimulation()
       .force('link', d3.forceLink().id((d: Node) => d.name))// the id of the node
-      .force("charge", d3.forceManyBody().strength(-5).distanceMax(0.1 * Math.min(width, height)))
+      .force("charge", d3.forceManyBody().strength(-5).distanceMax(0.5 * Math.min(width, height)))
       .force('center', d3.forceCenter(width / 2, height / 2));
 
-    // console.log(nodes, links);
+    console.log(nodes, links);
 
     const link = svg.append('g')
       .attr('class', 'links')
@@ -51,13 +52,18 @@ export class GraphComponent implements OnInit {
       .data(nodes)
       .enter()
       .append('circle')
-      .attr('r', 5)
+      .attr('r', 8)
       .attr("fill", function(d) { return color(d.company); })
       .call(d3.drag()
         .on('start', dragStarted)
         .on('drag', dragged)
         .on('end', dragEnded)
       );
+
+     node.append('text')
+            .text((d) => d.company)
+            .attr('x', 6)
+            .attr('y', 3);
 
 
     node.append('title').text((d) => d.name);

@@ -13,6 +13,7 @@ export class Node implements d3.SimulationNodeDatum {
   lastName: string;
   name: string;
   company: string;
+  // id: string;
 
 
   // constructor(id) {

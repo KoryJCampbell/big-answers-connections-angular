@@ -8,6 +8,8 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NgxStickySidebarModule } from '@smip/ngx-sticky-sidebar';
+import { NgxCsvParserModule } from 'ngx-csv-parser';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { NgxStickySidebarModule } from '@smip/ngx-sticky-sidebar';
     NgxDropzoneModule,
     FlexLayoutModule,
     AppRoutingModule,
-    NgxStickySidebarModule
+    NgxStickySidebarModule,
+    NgxCsvParserModule
   ],
   providers: [],
   bootstrap: [AppComponent],
