@@ -1,11 +1,12 @@
 @import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 .example-spacer {
   flex: 1 1 auto;
 }
 
 * {
-  font-family: Lato;
+  font-family: 'Montserrat', sans-serif;
 }
 
 ngx-dropzone,

@@ -6,7 +6,8 @@ import { GraphComponent } from './graph/graph.component';
 import { LoginComponent } from './login/login.component';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module'
+import { AppRoutingModule } from './app-routing.module';
+import { NgxStickySidebarModule } from '@smip/ngx-sticky-sidebar';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AppRoutingModule } from './app-routing.module'
     BrowserAnimationsModule,
     NgxDropzoneModule,
     FlexLayoutModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxStickySidebarModule
   ],
   providers: [],
   bootstrap: [AppComponent],

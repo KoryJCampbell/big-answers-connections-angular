@@ -15,9 +15,14 @@
 }
 
 .node-name {
-  font-family: 'Lato';
+  font-family: 'Montserrat';
   text-anchor: middle;
   alignment-baseline: central;
   font-weight: 300;
   fill: black;
+}
+
+.connections-checkbox {
+  width: 400px;
+  height: 200px;
 }

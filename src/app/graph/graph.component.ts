@@ -24,7 +24,7 @@ export class GraphComponent implements OnInit {
     const width = +svg.attr('width');
     const height = +svg.attr('height');
 
-    const color = d3.scaleOrdinal(d3.schemeTableau10);
+    const color = d3.scaleOrdinal(d3.schemeBlues[9]);
 
 
     const simulation = d3.forceSimulation()
