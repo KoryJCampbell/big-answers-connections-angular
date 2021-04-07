@@ -44,8 +44,6 @@ export class GraphComponent implements OnInit {
       .attr('stroke-width', d => Math.sqrt(d.index))
       .attr('stroke', 'black');
 
-
-
     const node = svg.append('g')
       .attr('class', 'nodes')
       .selectAll('circle')
