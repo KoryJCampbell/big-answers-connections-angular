@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3';
 import {Node} from '../d3/models/node';
 import {Link} from '../d3/models/link';
-
+import ForceGraph3D from '3d-force-graph';
 
 @Component({
   selector: 'app-graph',
