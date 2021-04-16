@@ -116,7 +116,5 @@ function loadGraph(connections, nodes, links) {
 
     localStorage.setItem('graph', JSON.stringify(graph));
 
-
-
   }
 }
