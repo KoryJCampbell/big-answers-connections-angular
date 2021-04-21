@@ -12,8 +12,6 @@ import { Papa } from 'ngx-papaparse';
 
 export class LoginComponent implements OnInit {
   files: File[] = [];
-
-
   connections: any[] = [];
   nodes: any[] = [];
   links: any[] = [];
@@ -31,7 +29,9 @@ export class LoginComponent implements OnInit {
   }) {
     this.files.push(...event.addedFiles);
 
+    localStorage.clear;
 
+    //[TODO] Papa Parse Must Parse Indiduvual File object then on LoadGraph() Add User Object -> Indiuvual Node
     let allResults = [];
     var self = this;
     for (let i = 0; i < this.files.length; i++) {
@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit {
             loadGraph(self.connections, self.nodes, self.links);
 
             console.log('finished');
-            // Navigate to D3 Graph
           }
         }
       })
@@ -75,8 +74,6 @@ function loadGraph(connections, nodes, links) {
   //let links = [];
   //let nodes = [];
 
-
-
   nodes.push({
     "firstName": "You",
     "lastName": "",
@@ -96,18 +93,23 @@ function loadGraph(connections, nodes, links) {
       "firstName": source["First Name"],
       "lastName": source["Last Name"],
       "name": sourceName,
-      "company": source["Company"]
+      "company": source["Company"],
+      "position": source["Position"]
     });
 
-    for (const target of connections) {
-      const targetName = target["First Name"] + " " + target["Last Name"];
-      if (sourceName != targetName && source["Company"] == target["Company"]) {
-        links.push({
-          "source": sourceName,
-          "target": targetName
-        });
-      }
-    }
+    //[TODO]
+    // 1. Group Nodes Together by User
+    // 2. Compare User Connections by sourceName
+
+    // for (const target of connections) {
+    //   const targetName = target["First Name"] + " " + target["Last Name"];
+    //   if (sourceName != targetName && source["Company"] == target["Company"]) {
+    //     links.push({
+    //       "source": sourceName,
+    //       "target": targetName
+    //     });
+    //   }
+    // }
 
     const graph = {
       "nodes": nodes,
