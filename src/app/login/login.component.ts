@@ -1,3 +1,4 @@
+import { ReturnStatement } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Papa } from 'ngx-papaparse';
@@ -8,7 +9,6 @@ import { Papa } from 'ngx-papaparse';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-
 
 export class LoginComponent implements OnInit {
   files: File[] = [];
@@ -23,6 +23,21 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  getKey(node) {
+    return `${node["First Name"]} ${node["Last Name"]}`
+  }
+
+  createNodeFromResult(result) {
+    const sourceName = result["First Name"] + " " + result["Last Name"];
+    let node = {
+      "firstName": result["First Name"],
+      "lastName": result["Last Name"],
+      "name": sourceName,
+      "company": result["Company"],
+      "position": result["Position"]
+
+    }
+  }
 
   onSelect(event: {
     addedFiles: any;
@@ -33,21 +48,63 @@ export class LoginComponent implements OnInit {
 
     //[TODO] Papa Parse Must Parse Indiduvual File object then on LoadGraph() Add User Object -> Indiuvual Node
     let allResults = [];
+
+    //Start with a graph -- right now, this is empty, but in the future, you might load this from local storage
+    const graph = {
+      "nodes": [],
+      "links": [],
+    }
+
     var self = this;
     for (let i = 0; i < this.files.length; i++) {
       this.papa.parse(this.files[i], {
         header: true,
         complete: function (results) {
-          allResults.push(results.data);
-          if (allResults.length) {
-            self.connections = self.connections.concat(allResults[0]);
-            loadGraph(self.connections, self.nodes, self.links);
-
-            console.log('finished');
+          let node = {
+            "firstName": "You",
+            "lastName": "Last",
+            "name": "You Last",
+            "company": "",
+            "connections": [],
           }
+
+          let connections = []
+          results.data.forEach((result) => {
+            let connection = {...result}
+            let id = self.getKey(result)
+
+            connection[id] = result
+            connections.push(connection)
+
+            graph.nodes.forEach((existing_node) => {
+              //check if this connection's id already exists in other nodes
+              if(existing_node.connections[id] !== undefined) {
+                graph.nodes.push(self.createNodeFromResult(connection))
+                graph.links.push({
+                  source: node.name,
+                  target: connection.name
+                })
+
+                graph.links.push({
+                  source: existing_node.name,
+                  target: connection.name
+                })
+              }
+            })
+          })
+
+          node.connections = connections;
+
+          console.log("finished building node", node)
+
+          graph.nodes.push(node)
         }
       })
     }
+
+    console.log('setting local storage", graph', graph)
+    localStorage.setItem('graph', JSON.stringify(graph));
+
   }
 
 
@@ -61,62 +118,5 @@ clickButton() {
   onRemove(event: File) {
     this.files.splice(this.files.indexOf(event), 1);
   }
-
-
-
-
 }
 
-
-function loadGraph(connections, nodes, links) {
-
-  //let connections = allResults[0];
-  //let links = [];
-  //let nodes = [];
-
-  nodes.push({
-    "firstName": "You",
-    "lastName": "",
-    "name": "You",
-    "company": ""
-  });
-
-  for (const source of connections) {
-    const sourceName = source["First Name"] + " " + source["Last Name"];
-
-    links.push({
-      "source": "You",
-      "target": sourceName
-    });
-
-    nodes.push({
-      "firstName": source["First Name"],
-      "lastName": source["Last Name"],
-      "name": sourceName,
-      "company": source["Company"],
-      "position": source["Position"]
-    });
-
-    //[TODO]
-    // 1. Group Nodes Together by User
-    // 2. Compare User Connections by sourceName
-
-    // for (const target of connections) {
-    //   const targetName = target["First Name"] + " " + target["Last Name"];
-    //   if (sourceName != targetName && source["Company"] == target["Company"]) {
-    //     links.push({
-    //       "source": sourceName,
-    //       "target": targetName
-    //     });
-    //   }
-    // }
-
-    const graph = {
-      "nodes": nodes,
-      "links": links
-    }
-
-    localStorage.setItem('graph', JSON.stringify(graph));
-
-  }
-}
