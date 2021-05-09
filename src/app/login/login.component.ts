@@ -64,7 +64,6 @@ export class LoginComponent implements OnInit {
     //[TODO] Papa Parse Must Parse Indiduvual File object then on LoadGraph() Add User Object -> Indiuvual Node
     // let allResults = [];
 
-    //Start with a graph -- right now, this is empty, but in the future, you might load this from local storage
     const graph = {
       "nodes": [],
       "links": [],
@@ -128,13 +127,9 @@ export class LoginComponent implements OnInit {
     }
 
 
-
     Promise.all(file_promises).then(() => {
-      // console.log('setting local storage", graph', graph)
       localStorage.setItem('graph', JSON.stringify(graph));
     })
-
-
 
   }
 
@@ -143,7 +138,6 @@ clickButton() {
     this.router.navigateByUrl('/graph');
 
 }
-
 
 
   onRemove(event: File) {

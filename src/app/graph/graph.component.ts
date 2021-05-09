@@ -10,54 +10,41 @@ import {Link} from '../d3/models/link';
 })
 export class GraphComponent implements OnInit {
 
-  constructor() { }
+  constructor() {}
 
   numOfConnections: any;
   filters: string[];
-  filterlinks :Array<any> = new Array();
-  filterNodes :Array<any> = new Array();
-
-  // filters = ['Person 1']
+  filterlinks: Array < any > = new Array();
+  filterNodes: Array < any > = new Array();
 
   ngOnInit() {
     const retrievedObject = localStorage.getItem('graph');
     const graph = JSON.parse(retrievedObject);
     this.numOfConnections = graph.nodes;
     this.filters = [];
-    // console.log('Num of Connections: ====>', this.numOfConnections);
     this.loadForceDirectedGraph(graph.nodes, graph.links);
 
   }
 
-   userClick(e,user:string)
-    {
-      const retrievedObject = localStorage.getItem('graph');
-      const graph = JSON.parse(retrievedObject);
+  userClick(e, user: string) {
+    const retrievedObject = localStorage.getItem('graph');
+    const graph = JSON.parse(retrievedObject);
 
-      if(e.checked)
-      {
-        //const _filterLinks = graph.links.filter(x => x.source == user)
-        const _filterNodes = graph.nodes.filter(x => x.name == user)
-
-        //this.filterlinks=this.filterlinks.concat(_filterLinks);
-        this.filterNodes=this.filterNodes.concat(_filterNodes)
-      }
-      else
-      {
-          //this.filterlinks = this.filterlinks.filter(x => x.source != user)
-          this.filterNodes = this.filterNodes.filter(x => x.name != user)
-      }
-
-      if(this.filterNodes.length == 0)
-      {
-        this.loadForceDirectedGraph(graph.nodes, graph.links);
-      }
-      else{
-        this.loadForceDirectedGraph(this.filterNodes,graph.links);
-      }
-
-
+    if (e.checked) {
+      const _filterNodes = graph.nodes.filter(x => x.name == user)
+      this.filterNodes = this.filterNodes.concat(_filterNodes)
+    } else {
+      this.filterNodes = this.filterNodes.filter(x => x.name != user)
     }
+
+    if (this.filterNodes.length == 0) {
+      this.loadForceDirectedGraph(graph.nodes, graph.links);
+    } else {
+      this.loadForceDirectedGraph(this.filterNodes, graph.links);
+    }
+
+
+  }
 
   loadForceDirectedGraph(nodes: Node[], links: Link[]) {
     const svg = d3.select('svg');
@@ -68,12 +55,9 @@ export class GraphComponent implements OnInit {
 
 
     const simulation = d3.forceSimulation()
-      .force('link', d3.forceLink().id((d: Node) => d.name))// the id of the node
+      .force('link', d3.forceLink().id((d: Node) => d.name)) // the id of the node
       .force("charge", d3.forceManyBody())
       .force('center', d3.forceCenter(width / 2, height / 2));
-
-    // console.log('NODES ===>>>', nodes.length);
-    // console.log('LINKS ===>>>', links.length);
 
 
     const link = svg.append('g')
@@ -106,7 +90,9 @@ export class GraphComponent implements OnInit {
       .attr('d', user_icon_path)
       .attr('transform', 'scale(0.025)')
       .attr('transform-origin', "-7px -7px")
-      .attr("fill", function(d) { return color(d.company); })
+      .attr("fill", function (d) {
+        return color(d.company);
+      })
       .attr('stroke', 'black')
       .attr('stroke-width', 1)
       .call(d3.drag()
@@ -125,17 +111,19 @@ export class GraphComponent implements OnInit {
       .enter()
       .append('circle')
       .attr('r', 5)
-      .attr("fill", function(d) { return color(d.company); })
+      .attr("fill", function (d) {
+        return color(d.company);
+      })
       .call(d3.drag()
         .on('start', dragStarted)
         .on('drag', dragged)
         .on('end', dragEnded)
       );
 
-     user_node.append('text')
-            .text((d) => d.company)
-            .attr('x', 6)
-            .attr('y', 3);
+    user_node.append('text')
+      .text((d) => d.company)
+      .attr('x', 6)
+      .attr('y', 3);
 
 
     user_node.append('title').text((d) => d.name);
@@ -144,7 +132,7 @@ export class GraphComponent implements OnInit {
       .nodes(nodes)
       .on('tick', ticked);
 
-    simulation.force<d3.ForceLink<any, any>>('link')
+    simulation.force < d3.ForceLink < any, any >> ('link')
       .links(links);
 
     function ticked() {
@@ -152,20 +140,22 @@ export class GraphComponent implements OnInit {
         .attr('transform', d => `translate(${d.x}, ${d.y})`)
 
       connection_node
-        .attr('cx', d=> d.x)
+        .attr('cx', d => d.x)
         .attr('cy', d => d.y);
 
       link
-          .attr('x1', d => d.source.x)
-          .attr('y1', d => d.source.y)
-          .attr('x2', d => d.target.x)
-          .attr('y2', d => d.target.y);
+        .attr('x1', d => d.source.x)
+        .attr('y1', d => d.source.y)
+        .attr('x2', d => d.target.x)
+        .attr('y2', d => d.target.y);
     }
 
 
 
     function dragStarted(event) {
-      if (!event.active) { simulation.alphaTarget(0.3).restart(); }
+      if (!event.active) {
+        simulation.alphaTarget(0.3).restart();
+      }
       event.subject.fx = event.subject.x;
       event.subject.fy = event.subject.y;
     }
@@ -176,7 +166,9 @@ export class GraphComponent implements OnInit {
     }
 
     function dragEnded(event) {
-      if (!event.active) { simulation.alphaTarget(0); }
+      if (!event.active) {
+        simulation.alphaTarget(0);
+      }
       event.subject.fx = null;
       event.subject.fy = null;
     }
